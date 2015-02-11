@@ -37,12 +37,7 @@ class File{
     public function unzip(){
 
         $this->zipper->make($this->filename)->extractTo(getcwd().'/files/doc');
-       /* $zip = $this->zipper->make($this->filename);
-        echo '<pre>';
-        print_r($zip);
-        echo '</pre>';exit;*/
+
     }
-
-
 
 }

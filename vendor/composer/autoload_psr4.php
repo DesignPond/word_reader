@@ -6,5 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Selene\\Module\\Xml\\' => array($vendorDir . '/selene/xml'),
+    'Selene\\Module\\Common\\' => array($vendorDir . '/selene/common'),
+    'Prewk\\' => array($vendorDir . '/prewk/xml-string-streamer/src'),
     'Pond\\' => array($baseDir . '/src'),
 );

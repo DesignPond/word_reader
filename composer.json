@@ -1,7 +1,10 @@
 {
     "require": {
         "phpunit/phpunit": "4.5.0",
-        "Chumper/Zipper": "0.5.0"
+        "Chumper/Zipper": "0.5.0",
+        "selene/common":"dev-development",
+        "selene/xml": "dev-development",
+        "prewk/xml-string-streamer": "0.6.*"
     },
     "autoload": {
         "psr-4": {"Pond\\": "src/"}
