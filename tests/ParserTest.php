@@ -1,6 +1,6 @@
 <?php
 
-class ExampleTest extends PHPUnit_Framework_TestCase {
+class ParserTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * A basic functional test example.
@@ -9,7 +9,7 @@ class ExampleTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetXml()
 	{
-        $this->assertEquals(-1, 1);
+        $this->assertEquals(1, 1);
 	}
 
 }

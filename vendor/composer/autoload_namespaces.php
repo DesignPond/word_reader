@@ -8,6 +8,10 @@ $baseDir = dirname($vendorDir);
 return array(
     'phpDocumentor' => array($vendorDir . '/phpdocumentor/reflection-docblock/src'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
+    'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
+    'Illuminate\\Support' => array($vendorDir . '/illuminate/support'),
+    'Illuminate\\Filesystem' => array($vendorDir . '/illuminate/filesystem'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src'),
+    'Chumper\\Zipper' => array($vendorDir . '/chumper/zipper/src'),
 );

@@ -985,5 +985,201 @@
             "testing",
             "xunit"
         ]
+    },
+    {
+        "name": "symfony/finder",
+        "version": "v2.5.10",
+        "version_normalized": "2.5.10.0",
+        "target-dir": "Symfony/Component/Finder",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Finder.git",
+            "reference": "e527ebf47ff912a45e148b7d0b107b80ec0b3cc2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/Finder/zipball/e527ebf47ff912a45e148b7d0b107b80ec0b3cc2",
+            "reference": "e527ebf47ff912a45e148b7d0b107b80ec0b3cc2",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2015-01-03 08:01:13",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.5-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\Finder\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Symfony Finder Component",
+        "homepage": "http://symfony.com"
+    },
+    {
+        "name": "illuminate/support",
+        "version": "v4.2.16",
+        "version_normalized": "4.2.16.0",
+        "target-dir": "Illuminate/Support",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/illuminate/support.git",
+            "reference": "015f51f4d8cb3d9a29e7fe7932843acf15232941"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/illuminate/support/zipball/015f51f4d8cb3d9a29e7fe7932843acf15232941",
+            "reference": "015f51f4d8cb3d9a29e7fe7932843acf15232941",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "jeremeamia/superclosure": "~1.0.1",
+            "patchwork/utf8": "1.1.*"
+        },
+        "time": "2014-12-19 18:02:33",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Illuminate\\Support": ""
+            },
+            "files": [
+                "Illuminate/Support/helpers.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Taylor Otwell",
+                "email": "taylorotwell@gmail.com"
+            }
+        ]
+    },
+    {
+        "name": "illuminate/filesystem",
+        "version": "v4.2.16",
+        "version_normalized": "4.2.16.0",
+        "target-dir": "Illuminate/Filesystem",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/illuminate/filesystem.git",
+            "reference": "bf8e1443b956e2b87dc71f40035380fbc790f612"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/illuminate/filesystem/zipball/bf8e1443b956e2b87dc71f40035380fbc790f612",
+            "reference": "bf8e1443b956e2b87dc71f40035380fbc790f612",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "4.2.*",
+            "php": ">=5.4.0",
+            "symfony/finder": "2.5.*"
+        },
+        "time": "2014-10-10 14:30:55",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Illuminate\\Filesystem": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Taylor Otwell",
+                "email": "taylorotwell@gmail.com"
+            }
+        ]
+    },
+    {
+        "name": "chumper/zipper",
+        "version": "0.5.0",
+        "version_normalized": "0.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Chumper/Zipper.git",
+            "reference": "9c5660c5193246a6ffcc483b31353bef6429128a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Chumper/Zipper/zipball/9c5660c5193246a6ffcc483b31353bef6429128a",
+            "reference": "9c5660c5193246a6ffcc483b31353bef6429128a",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/filesystem": "4.x",
+            "illuminate/support": "4.x",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "dev-master",
+            "phpunit/phpunit": "3.7.*"
+        },
+        "time": "2014-11-25 20:57:48",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Chumper\\Zipper": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache2"
+        ],
+        "authors": [
+            {
+                "name": "Nils Plaschke",
+                "email": "github@nilsplaschke.de",
+                "homepage": "http://nilsplaschke.de",
+                "role": "Developer"
+            }
+        ],
+        "description": "This is a little neat helper for the ZipArchive methods with handy functions",
+        "homepage": "http://github.com/Chumper/zipper",
+        "keywords": [
+            "archive",
+            "laravel",
+            "zip"
+        ]
     }
 ]
