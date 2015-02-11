@@ -236,9 +236,9 @@ class Parserxml{
         if($xml == false){
             return false;
         }
-        $xml = mb_convert_encoding($xml, 'UTF-8', mb_detect_encoding($xml));
+        $xml    = mb_convert_encoding($xml, 'UTF-8', mb_detect_encoding($xml));
         $parser = xml_parser_create('UTF-8');
-        $data = array();
+        $data   = array();
         xml_parse_into_struct($parser, $xml, $data);
         foreach($data as $value){
             if($value['tag']=="RELATIONSHIP"){
@@ -440,6 +440,9 @@ class Parserxml{
                 case "W:TR"://the table row is initiated
                     $return = "<tr>";
                     break;
+                case "w:numPr"://the table row is initiated
+                    $return = "<ul>";
+                    break;
                 case "W:TC"://the table cell is initiated
                     $return = "<td>";
                     break;
@@ -499,6 +502,14 @@ class Parserxml{
                     $return = "<strong>";//return the text (add spaces after)
                     $this->tagcloset = "</strong>";
                     break;
+                case "W:NUMID"://word style for bold
+                    if($this->tagcloset == "</span>"){
+                        break;
+                    }
+                    if($data['attributes']['W:VAL'] > 0){
+                        $return = "<i class='bullet'></i>";//return the text (add spaces after)
+                    }
+                    break;
                 case "W:I"://word style for italics
                     if($this->tagcloset == "</em>"){
                         break;
@@ -532,6 +543,13 @@ class Parserxml{
                 case "W:BOOKMARKSTART"://word style for bookmarks/internal links
                     $return = "<a id='".$data['attributes']['W:NAME']."'></a>";
                     break;
+                case "MA14:WRAPPINGTEXTBOXFLAG"://word style for bookmarks/internal links
+                    if($this->tagcloset == "</div>"){
+                        break;
+                    }
+                    $return = "<div class='well'>";//return the text (add spaces after)
+                    $this->tagcloset = "</div>";
+                    break;
                 default:
                     break;
             }
@@ -547,6 +565,9 @@ class Parserxml{
                     break;
                 case "W:TR"://the table row ends
                     $return = "</tr>";
+                    break;
+                case "w:numPr"://the table row is initiated
+                    $return = "</ul>";
                     break;
                 case "W:TBL"://the table ends
                     $return = "</table>";
@@ -703,6 +724,56 @@ class Parserxml{
 
         return $goodHTML;
 
+    }
+
+    function extractXMLShow(){
+        $xmlFile = getcwd()."/files/unzip/test/word/document.xml";
+        $xml     = file_get_contents($xmlFile);
+
+        if($xml == false){
+            return false;
+        }
+
+        $xml    = mb_convert_encoding($xml, 'UTF-8', mb_detect_encoding($xml));
+        $parser = xml_parser_create('UTF-8');
+        $data   = array();
+
+        xml_parse_into_struct($parser, $xml, $data);
+
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+
+    }
+
+    function extractRelXMLShow(){
+
+        $xmlFile = getcwd()."/files/unzip/test/word/_rels/document.xml.rels";
+
+        $xml = file_get_contents($xmlFile);
+        if($xml == false){
+            return false;
+        }
+
+        $xml    = mb_convert_encoding($xml, 'UTF-8', mb_detect_encoding($xml));
+        $parser = xml_parser_create('UTF-8');
+        $data   = array();
+        xml_parse_into_struct($parser, $xml, $data);
+
+        foreach($data as $value){
+            if($value['tag']=="RELATIONSHIP"){
+                //it is an relationship tag, get the ID attr as well as the TARGET and (if set, the targetmode)set into var.
+                if(isset($value['attributes']['TARGETMODE'])){
+                    $this->rels[$value['attributes']['ID']] = array(0 => $value['attributes']['TARGET'], 3=> $value['attributes']['TARGETMODE']);
+                } else {
+                    $this->rels[$value['attributes']['ID']] = array(0 => $value['attributes']['TARGET']);
+                }
+            }
+        }
+
+        echo "<pre>";
+        print_r($this->rels);
+        echo "</pre>";
     }
 
 
