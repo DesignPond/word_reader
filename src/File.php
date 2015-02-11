@@ -14,6 +14,14 @@ class File{
         $this->zipper = $zipper;
     }
 
+    public function extract($file){
+
+        $this->renameToZip($file);
+        $this->unzip();
+
+        return true;
+    }
+
     public function getExtension($file){
 
         $this->extension = pathinfo($file, PATHINFO_EXTENSION);
@@ -35,6 +43,10 @@ class File{
     }
 
     public function unzip(){
+
+        if (!file_exists(getcwd().'/files/doc')) {
+            mkdir(getcwd().'/files/doc', 0777, true);
+        }
 
         $this->zipper->make($this->filename)->extractTo(getcwd().'/files/doc');
 

@@ -8,7 +8,7 @@ $reader = new Parserxml();
 
 $xml  = getcwd().'/files/doc/word/document.xml';
 
-$array = $reader->extractXML($xml);
+$array = $reader->Init();
 
 ?>
 <!doctype html>
@@ -24,9 +24,9 @@ $array = $reader->extractXML($xml);
 <body>
 
 <div class="container">
-	<div class="col-md-12">
+	<div class="col-md-10 col-sm-offset-1">
         <?php
-
+        echo($reader->error);
         //echo '<pre>';
         echo '<p>';
         echo($reader->output);
