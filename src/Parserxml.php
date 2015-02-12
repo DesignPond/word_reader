@@ -492,7 +492,8 @@ class Parserxml{
                     }elseif($data['attributes']['W:VAL'] == "Heading2" || $data['attributes']['W:VAL'] == "Titre2"){
                         $return = "<h2>";
                         $this->tagclosep = "</h2>";
-                    }elseif($data['attributes']['W:VAL'] == "Heading3" || $data['attributes']['W:VAL'] == "Titre3"){
+                    }
+                    elseif($data['attributes']['W:VAL'] == "Heading3" || $data['attributes']['W:VAL'] == "Titre3"){
                         $return = "<h3>";
                         $this->tagclosep = "</h3>";
                     }
@@ -504,7 +505,7 @@ class Parserxml{
                     $return = "<strong>";//return the text (add spaces after)
                     $this->tagcloset = "</strong>";
                     break;
-                case "W:NUMID"://word style for bold
+                case "W:NUMID"://word style for list
                     if($this->tagcloset == "</span>"){
                         break;
                     }
@@ -521,7 +522,7 @@ class Parserxml{
                     break;
                 case "W:JC"://word style for italics
                     if($data['attributes']['W:VAL'] == "both"){
-                        $return = "<span style='text-align: justify;display: block;'>";
+                        $return = "<span style='text-align: justify;'>";
                         $this->tagclosep = "</span>";
                     }elseif($data['attributes']['W:VAL'] == "left"){
                         $return = "<span style='text-align: left;display: block;'>";

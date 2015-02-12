@@ -42,20 +42,15 @@ $array = $reader->Init();
 
         //$reader->setDocPath(getcwd().'/files/question.docx');
 
-        echo $reader->docxPath;
-        echo($reader->error);
+/*        echo($reader->error);
         echo($reader->status);
 
         echo '<pre>';
         $reader->extractXMLShow();
         echo '</pre>';
+*/
 
-        //echo '<pre>';
-        echo '<p>';
-        echo($reader->output);
-        echo '</p>';
-        //echo '</pre>';
-
+            echo($reader->output);
 
         ?>
 	</div>
