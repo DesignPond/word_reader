@@ -16,6 +16,8 @@ class File{
 
     public function extract($file){
 
+        //unlink(getcwd().'/files/unzip/'.$file);
+
         $this->renameToZip($file);
         $this->unzip();
 

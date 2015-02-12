@@ -9,7 +9,8 @@ class Parserxml{
      * @var String This is the path to the file that should be read
      * @since 1.0
      */
-    var $docxPath = 'files/test.docx';
+
+    var $docxPath = "question.docx";
     /**
      * @var String This is where the ziped contents will be extracted to to process
      * @since 1.0
@@ -31,7 +32,7 @@ class Parserxml{
      * @var String The path to where the content is extracted
      * @since 1.0
      */
-    var $content_folder = "";
+    var $content_folder = "files/doc";
     /**
      * @var String The current Status of the class
      * @since 1.0
@@ -136,6 +137,7 @@ class Parserxml{
     function DOCXtoHTML(){
         return __construct();
     }
+
     /**
      * This function will initialize the process as well as handle the process automatically.
      * This requires that the vars be set to start
@@ -175,8 +177,7 @@ class Parserxml{
         }
         if($this->DeleteTemps()==false){
             $this->time = $this->timer_stop(0);
-            $this->error = "16. The temporary files created during the process could not be deleted.
-                The contents, however, might still have been extracted.";
+            $this->error = "16. The temporary files created during the process could not be deleted. The contents, however, might still have been extracted.";
             return false;
         }
 
@@ -198,6 +199,7 @@ class Parserxml{
     }
 
     public function UnZipDocx(){
+
         return $this->zipper->extract($this->docxPath);
     }
     /**
@@ -455,7 +457,7 @@ class Parserxml{
                         //this is an external link to a website
                         $return = "<a href='".$path."'>";
                     } elseif(isset($data['attributes']['W:ANCHOR'])){
-                        $return = "<a href='#".$data['attributes']['W:ANCHOR']."'>";
+                        $return = "<a class='anchor' href='#".$data['attributes']['W:ANCHOR']."'>";
                     }
                     break;
                 default:
@@ -484,13 +486,13 @@ class Parserxml{
                     }
                     break;
                 case "W:PSTYLE"://word styles used for headings etc.
-                    if($data['attributes']['W:VAL'] == "Heading1"){
+                    if($data['attributes']['W:VAL'] == "Heading1" || $data['attributes']['W:VAL'] == "Titre1"){
                         $return = "<h1>";
                         $this->tagclosep = "</h1>";
-                    }elseif($data['attributes']['W:VAL'] == "Heading2"){
+                    }elseif($data['attributes']['W:VAL'] == "Heading2" || $data['attributes']['W:VAL'] == "Titre2"){
                         $return = "<h2>";
                         $this->tagclosep = "</h2>";
-                    }elseif($data['attributes']['W:VAL'] == "Heading3"){
+                    }elseif($data['attributes']['W:VAL'] == "Heading3" || $data['attributes']['W:VAL'] == "Titre3"){
                         $return = "<h3>";
                         $this->tagclosep = "</h3>";
                     }
@@ -517,6 +519,18 @@ class Parserxml{
                     $return = "<em>";//return the text (add spaces after)
                     $this->tagcloset = "</em>";
                     break;
+                case "W:JC"://word style for italics
+                    if($data['attributes']['W:VAL'] == "both"){
+                        $return = "<span style='text-align: justify;display: block;'>";
+                        $this->tagclosep = "</span>";
+                    }elseif($data['attributes']['W:VAL'] == "left"){
+                        $return = "<span style='text-align: left;display: block;'>";
+                        $this->tagclosep = "</span>";
+                    }elseif($data['attributes']['W:VAL'] == "right"){
+                        $return = "<span style='text-align: right;display: block;'>";
+                        $this->tagclosep = "</span>";
+                    }
+                    break;
                 case "W:U"://word style for underline
                     if($this->tagcloset == "</span>"){
                         break;
@@ -531,6 +545,18 @@ class Parserxml{
                     $return = "<span style='text-decoration:line-through;'>";//return the text (add spaces after)
                     $this->tagcloset = "</span>";
                     break;
+                case "W:IND"://word style for strike-throughs
+                    if($this->tagcloset == "</span>"){
+                        break;
+                    }
+                    if(isset($data['attributes']['W:LEFT'])){
+                        $return = "<span style='padding-left: ".($data['attributes']['W:LEFT']/20)."px;display: block;'>";//return the text (add spaces after)
+                    }
+                    else{
+                        $return = "<span>";
+                    }
+                    $this->tagcloset = "</span>";
+                    break;
                 case "W:VERTALIGN"://word style for super- and subscripts
                     if($data['attributes']['W:VAL'] == "subscript"){
                         $return = "<sub>";
@@ -541,7 +567,9 @@ class Parserxml{
                     }
                     break;
                 case "W:BOOKMARKSTART"://word style for bookmarks/internal links
-                    $return = "<a id='".$data['attributes']['W:NAME']."'></a>";
+                    if($data['attributes']['W:NAME'] != '_GoBack'){
+                        $return = "<a id='".$data['attributes']['W:NAME']."'></a>";
+                    }
                     break;
                 case "MA14:WRAPPINGTEXTBOXFLAG"://word style for bookmarks/internal links
                     if($this->tagcloset == "</div>"){
@@ -620,7 +648,7 @@ class Parserxml{
         //script terminates
         if(is_dir($this->tempDir)){
             //the temp directory still exist
-            $this->rrmdir($this->tempDir);
+            //$this->rrmdir($this->tempDir);
             unset($this->content_folder);
             unset($this->docxPath);
             unset($this->imagePathPrefix);
@@ -727,7 +755,7 @@ class Parserxml{
     }
 
     function extractXMLShow(){
-        $xmlFile = getcwd()."/files/unzip/test/word/document.xml";
+        $xmlFile = getcwd()."/files/doc/word/document.xml";
         $xml     = file_get_contents($xmlFile);
 
         if($xml == false){

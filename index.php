@@ -37,18 +37,26 @@ $array = $reader->Init();
 <body>
 
 <div class="container">
-	<div class="col-md-10 col-sm-offset-1">
+	<div class="col-md-8 col-md-offset-2">
         <?php
+
+        //$reader->setDocPath(getcwd().'/files/question.docx');
+
+        echo $reader->docxPath;
         echo($reader->error);
+        echo($reader->status);
+
+        echo '<pre>';
+        $reader->extractXMLShow();
+        echo '</pre>';
+
         //echo '<pre>';
         echo '<p>';
         echo($reader->output);
         echo '</p>';
         //echo '</pre>';
 
-        echo '<pre>';
-        $reader->extractXMLShow();
-        echo '</pre>';
+
         ?>
 	</div>
 </div>
