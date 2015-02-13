@@ -455,7 +455,7 @@ class Parserxml{
                     //now determine which type of link it is
                     if(strtolower($target) == "external"){
                         //this is an external link to a website
-                        $return = "<a href='".$path."'>";
+                        $return = "<a target='_blank' href='".$path."'>";
                     } elseif(isset($data['attributes']['W:ANCHOR'])){
                         $return = "<a class='anchor' href='#".$data['attributes']['W:ANCHOR']."'>";
                     }
@@ -479,23 +479,23 @@ class Parserxml{
                     $imagebigpath = $this->rels[$rid][2];
                     if($this->keepOriginalImage == true){
                         $return = "<a href='".$this->imagePathPrefix.$imagebigpath."' target='_blank' >
-                            <img style='display:inline;' src='".$this->imagePathPrefix.$imagepath."' alt='' />
+                            <img src='".$this->imagePathPrefix.$imagepath."' alt='' />
                             </a>";
                     } else {
-                        $return = "<img style='display:inline;' src='".$this->imagePathPrefix.$imagepath."' alt='' />";
+                        $return = "<img src='".$this->imagePathPrefix.$imagepath."' alt='' />";
                     }
                     break;
                 case "W:PSTYLE"://word styles used for headings etc.
                     if($data['attributes']['W:VAL'] == "Heading1" || $data['attributes']['W:VAL'] == "Titre1"){
-                        $return = "<div><h1>";
-                        $this->tagclosep = "</h1></div>";
+                        $return = "<h1>";
+                        $this->tagclosep = "</h1>";
                     }elseif($data['attributes']['W:VAL'] == "Heading2" || $data['attributes']['W:VAL'] == "Titre2"){
-                        $return = "<div><h2>";
-                        $this->tagclosep = "</h2></div>";
+                        $return = "<h2>";
+                        $this->tagclosep = "</h2>";
                     }
                     elseif($data['attributes']['W:VAL'] == "Heading3" || $data['attributes']['W:VAL'] == "Titre3"){
-                        $return = "<div><h3>";
-                        $this->tagclosep = "</h3></div>";
+                        $return = "<h3>";
+                        $this->tagclosep = "</h3>";
                     }
                     break;
                 case "W:B"://word style for bold
@@ -510,7 +510,7 @@ class Parserxml{
                         break;
                     }
                     if($data['attributes']['W:VAL'] > 0){
-                        $return = "<i class='bullet'></i>";//return the text (add spaces after)
+                        $return = "<span rel='list'></span>";//return the text (add spaces after)
                     }
                     break;
                 case "W:I"://word style for italics
@@ -522,41 +522,41 @@ class Parserxml{
                     break;
                 case "W:JC"://word style for italics
                     if($data['attributes']['W:VAL'] == "both"){
-                        $return = "<span style='text-align: justify;'>";
-                        $this->tagclosep = "</span>";
+                        $return = "<div class='text-justify'>";
+                        $this->tagclosep = "</div>";
                     }elseif($data['attributes']['W:VAL'] == "left"){
-                        $return = "<span style='text-align: left;display: block;'>";
-                        $this->tagclosep = "</span>";
+                        $return = "<div class='text-left'>";
+                        $this->tagclosep = "</div>";
                     }elseif($data['attributes']['W:VAL'] == "right"){
-                        $return = "<span style='text-align: right;display: block;'>";
-                        $this->tagclosep = "</span>";
+                        $return = "<div class='text-right'>";
+                        $this->tagclosep = "</div>";
                     }
                     break;
                 case "W:U"://word style for underline
-                    if($this->tagcloset == "</span>"){
+                    if($this->tagcloset == "</div>"){
                         break;
                     }
-                    $return = "<span style='text-decoration:underline;'>";//return the text (add spaces after)
-                    $this->tagcloset = "</span>";
+                    $return = "<u>";//return the text (add spaces after)
+                    $this->tagcloset = "</u>";
                     break;
                 case "W:STRIKE"://word style for strike-throughs
-                    if($this->tagcloset == "</span>"){
+                    if($this->tagcloset == "</div>"){
                         break;
                     }
-                    $return = "<span style='text-decoration:line-through;'>";//return the text (add spaces after)
-                    $this->tagcloset = "</span>";
+                    $return = "<s>";
+                    $this->tagcloset = "</s>";
                     break;
                 case "W:IND"://word style for strike-throughs
-                    if($this->tagcloset == "</span>"){
+                    if($this->tagcloset == "</div>"){
                         break;
                     }
                     if(isset($data['attributes']['W:LEFT'])){
-                        $return = "<span style='padding-left: ".($data['attributes']['W:LEFT']/20)."px;display: block;'>";//return the text (add spaces after)
+                        $return = "<div class='text-indent' rel='".($data['attributes']['W:LEFT']/20)."'>";
                     }
                     else{
-                        $return = "<span>";
+                        $return = "<div>";
                     }
-                    $this->tagcloset = "</span>";
+                    $this->tagcloset = "</div>";
                     break;
                 case "W:VERTALIGN"://word style for super- and subscripts
                     if($data['attributes']['W:VAL'] == "subscript"){
