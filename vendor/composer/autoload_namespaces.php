@@ -6,12 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'stringEncode' => array($vendorDir . '/paquettg/string-encode/src'),
     'phpDocumentor' => array($vendorDir . '/phpdocumentor/reflection-docblock/src'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
+    'Sunra\\PhpSimple\\HtmlDomParser' => array($vendorDir . '/sunra/php-simple-html-dom-parser/Src'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
-    'PHPHtmlParser' => array($vendorDir . '/paquettg/php-html-parser/src'),
     'Illuminate\\Support' => array($vendorDir . '/illuminate/support'),
     'Illuminate\\Filesystem' => array($vendorDir . '/illuminate/filesystem'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src'),

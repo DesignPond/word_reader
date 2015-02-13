@@ -434,7 +434,7 @@ class Parserxml{
             //if it is an open tag see if it should be parsed
             switch ($data['tag']) {
                 case "W:P"://the paragrah begins
-                    $return = "<p>";
+                    $return = "<div class='start'><p>";
                     break;
                 case "W:TBL"://the table is initiated
                     $return = "<table border='1'>";
@@ -475,7 +475,7 @@ class Parserxml{
                     break;
                 case "A:BLIP"://the image data
                     $rid = $data['attributes']['R:EMBED'];
-                    $imagepath = $this->rels[$rid][1];
+                    $imagepath    = $this->rels[$rid][1];
                     $imagebigpath = $this->rels[$rid][2];
                     if($this->keepOriginalImage == true){
                         $return = "<a href='".$this->imagePathPrefix.$imagebigpath."' target='_blank' >
@@ -487,15 +487,15 @@ class Parserxml{
                     break;
                 case "W:PSTYLE"://word styles used for headings etc.
                     if($data['attributes']['W:VAL'] == "Heading1" || $data['attributes']['W:VAL'] == "Titre1"){
-                        $return = "<h1>";
-                        $this->tagclosep = "</h1>";
+                        $return = "<div><h1>";
+                        $this->tagclosep = "</h1></div>";
                     }elseif($data['attributes']['W:VAL'] == "Heading2" || $data['attributes']['W:VAL'] == "Titre2"){
-                        $return = "<h2>";
-                        $this->tagclosep = "</h2>";
+                        $return = "<div><h2>";
+                        $this->tagclosep = "</h2></div>";
                     }
                     elseif($data['attributes']['W:VAL'] == "Heading3" || $data['attributes']['W:VAL'] == "Titre3"){
-                        $return = "<h3>";
-                        $this->tagclosep = "</h3>";
+                        $return = "<div><h3>";
+                        $this->tagclosep = "</h3></div>";
                     }
                     break;
                 case "W:B"://word style for bold
@@ -586,7 +586,7 @@ class Parserxml{
             //if it is an close tag see if it should be parsed
             switch ($data['tag']) {
                 case "W:P"://the paragraph ends
-                    $return = $this->tagclosep."</p>";
+                    $return = $this->tagclosep."</p></div>";
                     $this->tagclosep = "";
                     break;
                 case "W:TC"://the table cell ends
